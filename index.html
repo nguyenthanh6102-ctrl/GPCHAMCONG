@@ -17,7 +17,7 @@
     --weekend-fill:#FFECB3;
     --weekend-font:#E65100;
     --x-fill:#C8E6C9; --x-font:#1B5E20;
-    --p-fill:#FFE0B2; --p-font:#E65100;
+    --N-fill:#FFE0B2; --N-font:#E65100;
     --tc-fill:#FFF9C4; --tc-font:#966F06;
     --note-bg:#FAFAF8;
     --paper:#FAFAF7;
@@ -119,7 +119,7 @@
     min-height:36px;
   }
   .symbol-select.sym-x{background:var(--x-fill); color:var(--x-font); border-color:#a8d5ab;}
-  .symbol-select.sym-p{background:var(--p-fill); color:var(--p-font); border-color:#f0c48a;}
+  .symbol-select.sym-p{background:var(--N-fill); color:var(--N-font); border-color:#f0c48a;}
 
   .tc-hours{
     padding:6px 4px; text-align:center; font-weight:700; font-size:12.5px;
@@ -257,7 +257,7 @@
         <h2>Chú thích ký hiệu</h2>
         <div class="legend-item"><span class="legend-chip" style="background:var(--x-fill);color:var(--x-font)">X</span><span class="legend-desc">Làm đủ ngày (1 công)</span></div>
         <div class="legend-item"><span class="legend-chip" style="background:var(--x-fill);color:var(--x-font)">X/2</span><span class="legend-desc">Nửa ngày (0.5 công + 0.5 nghỉ)</span></div>
-        <div class="legend-item"><span class="legend-chip" style="background:var(--p-fill);color:var(--p-font)">P</span><span class="legend-desc">Nghỉ (0 công)</span></div>
+        <div class="legend-item"><span class="legend-chip" style="background:var(--p-fill);color:var(--p-font)">N</span><span class="legend-desc">Nghỉ </span></div>
         <div class="legend-item"><span class="legend-chip" style="background:var(--tc-fill);color:var(--tc-font)">TC</span><span class="legend-desc">Tăng ca — nhập số giờ làm thêm ngoài giờ hành chính</span></div>
       </section>
     </aside>
@@ -315,7 +315,7 @@
   "use strict";
 
   var STORAGE_KEY = "gpsolar_chamcong_v2";
-  var SYMBOLS = ["", "X", "X/2", "P"]; // TC tách riêng, không còn trong danh sách này
+  var SYMBOLS = ["", "X", "X/2", "N"]; // TC tách riêng, không còn trong danh sách này
 
   // ---------- State ----------
   function loadState(){
@@ -447,7 +447,7 @@
 
   function symbolClass(sym){
     if(sym === "X" || sym === "X/2") return "sym-x";
-    if(sym === "P") return "sym-p";
+    if(sym === "N") return "sym-p";
     return "";
   }
 
@@ -543,7 +543,7 @@
       switch(entry.symbol){
         case "X": cong+=1; break;
         case "X/2": cong+=0.5; phep+=0.5; break; // nửa ngày làm + nửa ngày nghỉ
-        case "P": phep+=1; break;
+        case "N": phep+=1; break;
       }
       // Giờ tăng ca độc lập với loại công phía trên -> cộng thêm bất kể symbol là gì
       tangca += (parseFloat(entry.tcHours) || 0);
